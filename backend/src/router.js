@@ -1,4 +1,7 @@
 import ejerciciosRouter from './routes/ejercicio'
+import userRouter from './routes/user'
+import userController from './controllers/user'
+
 
 export default (app) => {
 
@@ -7,5 +10,7 @@ export default (app) => {
     });
 
     app.use('/ejercicio', ejerciciosRouter)
+    app.use('/user', userRouter)
+    
   
   }
