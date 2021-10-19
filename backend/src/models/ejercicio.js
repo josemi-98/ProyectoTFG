@@ -18,11 +18,15 @@ const ejercicioSchema = new Schema({
         minlength: 5
     },
 
+<<<<<<< HEAD
     series: {
         type: Number,
         required: false
     },
     repeticiones: {
+=======
+    price: {
+>>>>>>> backend
         type: Number,
         required: false
     }
