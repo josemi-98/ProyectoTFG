@@ -3,14 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { InicioComponent } from './COMPONENTES/inicio/inicio.component';
+import { AgregarComponent } from './COMPONENTES/agregar/agregar.component';
+import { ModificarComponent } from './COMPONENTES/modificar/modificar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    InicioComponent,
+    AgregarComponent,
+    ModificarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
