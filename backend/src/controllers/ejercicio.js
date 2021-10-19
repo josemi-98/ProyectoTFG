@@ -1,3 +1,4 @@
+import { modelNames } from "mongoose";
 import Ejercicio from "../models/ejercicio";
 
 const ejerciciosController = {
@@ -19,14 +20,14 @@ const ejerciciosController = {
     getAllEjercicios: async (req, res) => {
         console.log('name ', req.body.user)
         try {
-            const ejercicios = await Ejercicios.find()
+            const ejercicios = await Ejercicio.find()
             res
                 .status(200)
                 .json(ejercicios)
         } catch (error) {
             res
                 .status(400)
-                .json({error: error})
+                .json({error: 'no se pueden mostrar los ejercicios'})
         }
     },
     getEjerciciosById: async (req, res) => {
@@ -34,7 +35,7 @@ const ejerciciosController = {
 
 
         try {
-            const ejercicios = await Ejercicios.findOne({_id})
+            const ejercicios = await Ejercicio.findOne({_id})
             const permitted = ejercicios.user == req.body.user || req.body.user == 'josee'
             if (!permitted) {
                 return res
@@ -76,14 +77,14 @@ const ejerciciosController = {
     deleteEjerciciosById: async (req, res) => {
         const _id = req.params.id
         try {
-            const productosToDelete = await Ejercicios.findOne({_id})
+            const productosToDelete = await Ejercicio.findOne({_id})
             const permitted = productosToDelete.user == req.body.user || req.body.user == 'josee'
             if (!permitted){
                 return res
                             .status(403)
                             .json({error: 'forbbiden'})
             }
-            const ejercicios = await Ejercicios.findByIdAndDelete(_id)
+            const ejercicios = await Ejercicio.findByIdAndDelete(_id)
             if(!ejercicios) {
                 return res.status(404).json({
                     message: 'no existe el ejercicio'
@@ -102,8 +103,8 @@ const ejerciciosController = {
     updateEjerciciosById: async (req, res) => {
         const _id = req.params.id
         const {body} = req;
-        const { name, description, caracteristicas, price  } = body
-        const ejerciciosToUpdate = await Ejercicios.findOne({_id})
+        const { name, description, series, repeticiones  } = body
+        const ejerciciosToUpdate = await Ejercicio.findOne({_id})
         const permitted = ejerciciosToUpdate.user == req.body.user || req.body.user == 'josee'
         if (!permitted){
             return res
@@ -111,10 +112,10 @@ const ejerciciosController = {
                         .json({error: 'forbbiden'})
         }
         try {
-            const ejercicios = await Ejercicios.findByIdAndUpdate(
+            const ejercicios = await Ejercicio.findByIdAndUpdate(
             _id,
 
-            { name: name, description: description, caracteristicas: caracteristicas, price: price },
+            { name: name, description: description, series: series, repeticiones: repeticiones },
             {new: true});
 
       if (!ejercicios) {

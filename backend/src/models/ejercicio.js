@@ -18,7 +18,11 @@ const ejercicioSchema = new Schema({
         minlength: 5
     },
 
-    price: {
+    series: {
+        type: Number,
+        required: false
+    },
+    repeticiones: {
         type: Number,
         required: false
     }
