@@ -12,6 +12,10 @@ const ejercicioSchema = new Schema({
         required: true,
         minlength: 5
     },
+  /*  image: {
+        type: Image,
+        required: false
+    },*/
     description: {
         type: String,
         required: true,

@@ -1,17 +1,19 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="/inicio">
+    <mat-icon>home</mat-icon>
   </button>
   <span>TRAINING</span>
   <span class="example-spacer"></span>
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Añadir ejercicio" routerLink="/add">
     <mat-icon>add</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="Iniciar sesion" routerLink="/inicio" >
+  <button mat-icon-button class="example-icon" aria-label="Iniciar sesion"  >
     <mat-icon>login</mat-icon>
   </button>
 </mat-toolbar>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
 
-<router-outlet></router-outlet>
 
 

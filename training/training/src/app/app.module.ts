@@ -9,7 +9,8 @@ import { ModificarComponent } from './COMPONENTES/modificar/modificar.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorComponent } from './error/error.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     AgregarComponent,
     InicioComponent,
-    ModificarComponent
+    ModificarComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [],

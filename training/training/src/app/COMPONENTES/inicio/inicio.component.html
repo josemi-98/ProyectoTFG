@@ -15,19 +15,28 @@
   </thead>
   <tbody>
     <tr *ngFor="let ejercicio of ListarEjercicio">
-      <th scope="row">1</th>
-      <td>{{ejercicio.id_ejercicio}}</td>
+      <!--<th scope="row">1</th>-->
+      <td>{{ejercicio._id}}</td>
       <td>{{ejercicio.user}}</td>
       <td>{{ejercicio.name}}</td>
+      <td> <img src="{{ejercicio.image}}" alt="" width="50" height="50">  </td>
       <td>{{ejercicio.description}}</td>
       <td>{{ejercicio.series}}</td>
       <td>{{ejercicio.repeticiones}}</td>
       <td>
-        <button type="button" class="btn btn-primary">Editar</button>
+        <button (click)="modificar(ejercicio._id)" type="button" mat-raised-button color="primary" >modificar</button>
       </td>
       <td>
-        <button type="button" class="btn btn-primary">Eliminar</button>
+        <button (click)="eliminar(ejercicio._id)" type="button" mat-raised-button color="warn">Eliminar</button>
       </td>
     </tr>
   </tbody>
 </table>
+
+<mat-list>
+  <ng-container *ngFor="let ejercicio of ListarEjercicio" >
+    <mat-list-item>{{ejercicio.name}}</mat-list-item>
+    <mat-divider></mat-divider>
+  </ng-container>
+</mat-list>
+

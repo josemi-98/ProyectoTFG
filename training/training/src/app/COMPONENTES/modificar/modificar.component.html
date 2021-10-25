@@ -1,1 +1,54 @@
 <p>modificar works!</p>
+<form [formGroup]="ejercicioForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="Nombre">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Descripcion</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Series</mat-label>
+    <input matInput formControlName="Series">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Repeticiones</mat-label>
+    <input matInput formControlName="Repeticiones">
+  </mat-form-field>
+
+  <button (click)="modificar()" mat-raised-button color="primary" mat-btn-type="submit">Guardar ejercicio</button>
+
+  <!--<button [disabled]="!ejercicioForm.valid"  mat-raised-button color="primary" mat-btn-type="submit">Guardar ejercicio</button>-->
+</form>
+
+
+<form [formGroup]="ejercicioForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Descripcion</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Series</mat-label>
+    <input matInput formControlName="series">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Repeticiones</mat-label>
+    <input matInput formControlName="repeticiones">
+  </mat-form-field>
+
+  <button (click)="modificar()" mat-raised-button color="primary" mat-btn-type="submit">Guardar ejercicio</button>
+
+  <button [disabled]="!ejercicioForm.valid"  mat-raised-button color="primary" mat-btn-type="submit">Guardar ejercicio</button>
+</form>
+
