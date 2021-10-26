@@ -8,9 +8,13 @@ import { InicioComponent } from './COMPONENTES/inicio/inicio.component';
 import { ModificarComponent } from './COMPONENTES/modificar/modificar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorComponent } from './error/error.component';
+import { SigninComponent } from './COMPONENTES/signin/signin.component';
+import { RegistrarComponent } from './COMPONENTES/registrar/registrar.component';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './SERVICES/token-interceptor.service';
 
 
 @NgModule({
@@ -19,7 +23,9 @@ import { ErrorComponent } from './error/error.component';
     AgregarComponent,
     InicioComponent,
     ModificarComponent,
-    ErrorComponent
+    ErrorComponent,
+    SigninComponent,
+    RegistrarComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,14 @@ import { ErrorComponent } from './error/error.component';
     ReactiveFormsModule
 
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,17 @@
+.abs-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  min-width: 190vh;
+}
+
+.form {
+  width:500px;
+}
+
+.card-header{
+  margin-bottom: 20px;
+  text-align: center;
+  color: #2271b3;
+}

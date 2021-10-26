@@ -1,15 +1,34 @@
+
 <mat-toolbar color="primary">
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="/inicio">
     <mat-icon>home</mat-icon>
   </button>
   <span>TRAINING</span>
-  <span class="example-spacer"></span>
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Añadir ejercicio" routerLink="/add">
     <mat-icon>add</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="Iniciar sesion"  >
-    <mat-icon>login</mat-icon>
-  </button>
+  <span class="example-spacer"></span>
+
+  <!--
+    *ngIf="!authService.loggedIn(); else loggedIn"
+
+    (click)="authService.logOut()"
+
+  -->
+
+  <ng-container >
+    <button mat-icon-button class="example-icon" aria-label="Iniciar sesion" routerLink="/signin"  >
+      <mat-icon>login</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Cerrar sesion" routerLink="/signup"  >
+      <mat-icon>logout</mat-icon>
+    </button>
+  </ng-container>
+  <ng-template #loggedIn>
+    <li class="nag-item">
+      <a class="nav-link" style="cursor: pointer;" >Logout</a>
+    </li>
+  </ng-template>
 </mat-toolbar>
 <div class="container">
   <router-outlet></router-outlet>

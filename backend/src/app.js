@@ -3,6 +3,9 @@ import config from "./config";
 import router from './router';
 import "./database";
 const app = express();
+const cors = require('cors')
+
+app.use(cors());
 
 // Config
 config(app);

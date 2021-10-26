@@ -47,6 +47,8 @@ export class NodeService {
     return this.http.put(this.url+'/'+id, ejercicio)
   }
 
+
+
 }
 
 export interface Ejercicio {
