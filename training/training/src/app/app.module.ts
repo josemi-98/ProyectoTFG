@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AgregarComponent } from './COMPONENTES/agregar/agregar.component';
@@ -15,27 +14,26 @@ import { SigninComponent } from './COMPONENTES/signin/signin.component';
 import { RegistrarComponent } from './COMPONENTES/registrar/registrar.component';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './SERVICES/token-interceptor.service';
+import { NgFallimgModule } from 'ng-fallimg';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { UsuariosComponent } from './COMPONENTES/usuarios/usuarios.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AgregarComponent,
-    InicioComponent,
-    ModificarComponent,
-    ErrorComponent,
-    SigninComponent,
-    RegistrarComponent
+    AppComponent, AgregarComponent, InicioComponent,
+    ModificarComponent, ErrorComponent, SigninComponent,
+    RegistrarComponent, UsuariosComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
-
+    BrowserModule, AppRoutingModule, BrowserAnimationsModule,
+    MaterialModule, HttpClientModule, FormsModule,
+    ReactiveFormsModule, MDBBootstrapModule.forRoot(), NgFallimgModule.forRoot({
+      default: 'assets/img.jpg'
+    }),
+    FlashMessagesModule
   ],
   providers: [
     AuthGuard,
@@ -43,7 +41,8 @@ import { TokenInterceptorService } from './SERVICES/token-interceptor.service';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
+    FlashMessagesService
   ],
   bootstrap: [AppComponent]
 })

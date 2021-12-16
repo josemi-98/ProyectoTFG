@@ -13,10 +13,16 @@ export class SigninComponent implements OnInit {
     name: '',
     password: ''
   }
-
   constructor( private authService: AuthService,
     private router: Router) { }
 
+    passwordType: string = 'password';
+    passwordIcon: string = 'eye-off';
+
+ mostrarPassword() {
+     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+     this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+ }
   ngOnInit(): void {
   }
 
@@ -33,5 +39,4 @@ export class SigninComponent implements OnInit {
     )
 
   }
-
 }

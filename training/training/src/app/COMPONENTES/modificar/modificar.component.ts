@@ -15,8 +15,8 @@ export class ModificarComponent implements OnInit {
     user: new FormControl('Nombre del usuario'),
     name: new FormControl('Nombre del ejercicio',[Validators.required, Validators.minLength(5)]),
     description: new FormControl('',[Validators.required, Validators.minLength(5)]),
-    series: new FormControl('',[Validators.required, Validators.minLength(5)]),
-    repeticiones: new FormControl('',[Validators.required, Validators.minLength(5)]),
+    series: new FormControl(''),
+    repeticiones: new FormControl(''),
   });
 
 
@@ -30,20 +30,28 @@ export class ModificarComponent implements OnInit {
     repeticiones: ''
   }
 
+  id_entrada:string = "";
+
   constructor(private nodeService: NodeService,
-      private rotuer: Router,
+      private router: Router,
       private activeRouter:ActivatedRoute
     ) { }
 
 
 
   ngOnInit(): void {
-    const id_entrada = <string> this.activeRouter.snapshot.params.id
-    console.log('id de entrada: '+id_entrada)
+    this.id_entrada = <string> this.activeRouter.snapshot.params.id
+    console.log('id de entrada: '+this.id_entrada)
 
-    if(id_entrada){
-      this.nodeService.getUnEjercicio(id_entrada).subscribe(
+    if(this.id_entrada != ""){
+      this.nodeService.getUnEjercicio(this.id_entrada).subscribe(
         res=>{
+          this.ejercicioForm.get('user')?.setValue(res.user);
+          this.ejercicioForm.get('name')?.setValue(res.name);
+          this.ejercicioForm.get('description')?.setValue(res.description)
+          this.ejercicioForm.get('image')?.setValue(res.image)
+          this.ejercicioForm.get('series')?.setValue(res.series)
+          this.ejercicioForm.get('repeticiones')?.setValue(res.repeticiones)
         // this.ejercicio = res;
           console.log(res)
         },
@@ -52,15 +60,24 @@ export class ModificarComponent implements OnInit {
     }
   }
 
-  modificar(){
-    this.nodeService.editEjercicio(this.ejercicio._id, this.ejercicio).subscribe(
-      res=>{
-        console.log(res)
-      },
-      err=> console.log(err)
-    )
+  editar(){
+    if(this.ejercicioForm.valid){
+      let ejercicio: Ejercicio = {
+        name: this.ejercicioForm.get('name')?.value,
+        _id: this.ejercicioForm.get('id')?.value,
+        user: this.ejercicioForm.get('user')?.value,
+        image: this.ejercicioForm.get('image')?.value,
+        description: this.ejercicioForm.get('description')?.value,
+        series: this.ejercicioForm.get('series')?.value,
+        repeticiones: this.ejercicioForm.get('repeticiones')?.value
+      };
 
-    this.rotuer.navigate(['/inicio'])
+      this.nodeService.editEjercicio(this.id_entrada, ejercicio).subscribe(
+        ()=>this.router.navigateByUrl('/inicio'),
+        (error)=> console.log(error)
+      );
+    }
+
   }
 
 }

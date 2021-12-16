@@ -1,38 +1,196 @@
 
-<mat-toolbar color="primary">
+<div style="background-color: black;">
+<mat-toolbar color="primary" style="background-color:rgb(39, 38, 38); color: rgb(255, 0, 0);">
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="/inicio">
     <mat-icon>home</mat-icon>
   </button>
   <span>TRAINING</span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Añadir ejercicio" routerLink="/add">
-    <mat-icon>add</mat-icon>
-  </button>
+
   <span class="example-spacer"></span>
 
-  <!--
-    *ngIf="!authService.loggedIn(); else loggedIn"
-
-    (click)="authService.logOut()"
-
-  -->
-
-  <ng-container >
+  <ng-container *ngIf="!authService.loggedIn(); else loggedIn"   >
     <button mat-icon-button class="example-icon" aria-label="Iniciar sesion" routerLink="/signin"  >
       <mat-icon>login</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Cerrar sesion" routerLink="/signup"  >
-      <mat-icon>logout</mat-icon>
+    <button mat-icon-button class="example-icon" aria-label="Registrarse" routerLink="/signup"  >
+      <mat-icon>supervised_user_circle</mat-icon>
     </button>
+
+
   </ng-container>
   <ng-template #loggedIn>
-    <li class="nag-item">
-      <a class="nav-link" style="cursor: pointer;" >Logout</a>
-    </li>
+    <input class="form-control mr-sm-3" type="search" placeholder="Buscar ejercicio" aria-label="Buscador" style="width: 300px;" (keyup)="loadEjercicios()"
+       [(ngModel)]="search">
+    <button mat-icon-button class="example-icon" aria-label="Cerrar Sesion" (click)="authService.logOut()" style="cursor: pointer;">
+      <mat-icon>logout</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Eliminar Sesion" (click)="logOut()" style="cursor: pointer;">
+      <mat-icon>delete_sweep</mat-icon>
+    </button>
   </ng-template>
 </mat-toolbar>
-<div class="container">
-  <router-outlet></router-outlet>
+
+<div style="margin-top: 20px;">
+<body>
+  <router-outlet ></router-outlet>
+</body>
+
+
+
+
+<!-- Footer -->
+<footer class="page-footer font-small" style="background-color:rgb(39, 38, 38)">
+
+  <div style="background-color:rgb(39, 38, 38)">
+    <div class="container"  >
+
+      <!-- Grid row-->
+      <div class="row py-4 d-flex align-items-center" style="background-color:rgb(39, 38, 38)">
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0" style="background-color:rgb(39, 38, 38)">
+          <h5 class="mb-0">¡Conéctate con nosotras en las redes sociales!</h5>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-7 text-center text-md-right" style="background-color:rgb(39, 38, 38)">
+
+          <!-- Facebook -->
+          <a class="fb-ic">
+            <a href="https://es-es.facebook.com/">
+              <mdb-icon fab icon="facebook" class="white-text mr-4" > </mdb-icon>
+            </a>
+
+          </a>
+          <!-- Twitter -->
+          <a class="tw-ic">
+            <mdb-icon fab icon="twitter" class="white-text mr-4"></mdb-icon>
+          </a>
+          <!-- Google +-->
+          <a class="gplus-ic">
+            <mdb-icon fab fab icon="google-plus" class="white-text mr-4"></mdb-icon>
+          </a>
+          <!--Linkedin -->
+          <a class="li-ic">
+            <mdb-icon fab icon="linkedin" class="white-text mr-4"></mdb-icon>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic">
+            <mdb-icon fab icon="instagram" class="white-text mr-4"></mdb-icon>
+          </a>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row-->
+
+    </div>
+  </div>
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left mt-5" style="background-color:rgb(39, 38, 38)">
+
+    <!-- Grid row -->
+    <div class="row mt-3" style="background-color:rgb(39, 38, 38)" >
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" style="background-color:rgb(39, 38, 38)">
+
+        <!-- Content -->
+        <h6 class="text-uppercase font-weight-bold">Entrenamiento</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>Aqui tienes todas posibilades de ejercicio de entrenamiento que necesitas para empezar tu vida fitness en gimnasios.
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style="background-color:rgb(39, 38, 38)">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Productos</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <a href="#!">MDBootstrap</a>
+        </p>
+        <p>
+          <a href="#!">MDWordPress</a>
+        </p>
+        <p>
+          <a href="#!">BrandFlow</a>
+        </p>
+        <p>
+          <a href="#!">Bootstrap Angular</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="background-color:rgb(39, 38, 38)">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Enlaces útiles</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <a href="#!">Su cuenta</a>
+        </p>
+        <p>
+          <a href="#!">Conviértete en afiliado</a>
+        </p>
+        <p>
+          <a href="#!">Tarifas de envio</a>
+        </p>
+        <p>
+          <a href="#!">Ayuda</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="background-color:rgb(39, 38, 38)">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Contacto</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <mdb-icon fas icon="home" class="mr-3"></mdb-icon> Jaen, JN 23008, ESPAÑA
+        </p>
+        <p>
+          <mdb-icon fas icon="envelope" class="mr-3"></mdb-icon> <a href="https://www.google.com/intl/es/gmail/about/"> josemimb98@gmail.com</a>
+        </p>
+        <p>
+          <mdb-icon fas icon="phone" class="mr-3"></mdb-icon> + 01 234 567 88
+        </p>
+        <p>
+          <mdb-icon fas icon="print" class="mr-3"></mdb-icon> + 01 234 567 88
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" style="background-color:black">© 2021 Copyright:
+    <a href="https://mdbootstrap.com/"> Empieza tu entrenamiento</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+
 </div>
 
+</div>
 
 

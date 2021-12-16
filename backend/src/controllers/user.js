@@ -51,7 +51,7 @@ const userController = {
             const users = await User.findByIdAndDelete(_id)
             if(!users) {
                 return res.status(404).json({
-                    message: 'no existe el ejercicio'
+                    message: 'no existe el usuario'
                 })
             }
             res

@@ -32,4 +32,34 @@ export class AuthService {
     this.router.navigate(['/signin'])
 
   }
+
+  //get ejercicios
+
+  getUsuarios() {
+    return this.http.get(this.url)
+  }
+
+  //get un Ejercicio
+
+  getUnUsario(id:String){
+    return this.http.get(this.url+'/'+id);
+  }
+  //eliminar
+  deleteUsuario(id:string){
+    return this.http.delete(this.url+'/'+id);
+  }
+
+
+
+
+}
+
+export interface User {
+  keys?: string;
+  _id: string ;
+  user?: string;
+  name?: string;
+  last_name?: string;
+  nationality?: string;
+  password?: string;
 }

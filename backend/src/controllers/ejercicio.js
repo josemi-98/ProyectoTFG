@@ -1,9 +1,11 @@
 import { modelNames } from "mongoose";
+import User from "../models/user";
 import Ejercicio from "../models/ejercicio";
 
 const ejerciciosController = {
     saveEjercicios: async (req, res) => {
         const { body } = req
+        console.log(body)
         try{
             const newEjercicio = await Ejercicio.create(body)
             res
@@ -11,16 +13,26 @@ const ejerciciosController = {
                 .json(newEjercicio)
 
         } catch (error){
+            console.log(error)
             res
                 .status(500)
                 .json({error:error})
+                
 
         } 
     },
     getAllEjercicios: async (req, res) => {
         console.log('name ', req.body.user)
+       // let ejerciciosName = new RegExp(`.*${req.query.search || ''}.*`)
+       const {searchBy} = req.query
+       let search = (searchBy)? new RegExp(`.*${searchBy}.*`): search = new RegExp (`.*`)
+      // (searchBy)? search =  new RegExp(`.*${searchBy}.*`): search = new RegExp (`.*`)
+       //let search = new RegExp(`.*${searchBy}.*`)
+       
         try {
-            const ejercicios = await Ejercicio.find()
+            //const ejercicios = await Ejercicio.find({name:ejerciciosName})
+            const ejercicios = await Ejercicio.find({name: search})
+            console.log(ejercicios)
             res
                 .status(200)
                 .json(ejercicios)
@@ -32,8 +44,6 @@ const ejerciciosController = {
     },
     getEjerciciosById: async (req, res) => {
         const _id = req.params.id
-
-
         try {
             const ejercicios = await Ejercicio.findOne({_id})
             const permitted = ejercicios.user == req.body.user || req.body.user == 'josee'
@@ -42,7 +52,6 @@ const ejerciciosController = {
                     .status(403)
                     .json({error: 'forbbiden'})
             }
-
             res
                 .status(200)
                 .json(ejercicios)
@@ -53,22 +62,15 @@ const ejerciciosController = {
         }
     },
     getEjerciciosByUser: async (req, res) => {
-        const{ user } = req.params
-        const permitted = user == req.body.user || req.body.user == 'josee'
-
-            if (!permitted){
-                return res
-                        .status(403)
-                        .json({error: 'forbbiden'})
-            }
-
+        const userName = req.body.user; 
         try {
-            const ejercicios = await Ejercicios.find({user: user})
+            const ejercicios = await Ejercicio.find({user: userName})
 
             res
                 .status(200)
                 .json(ejercicios)
         } catch (error) {
+            console.log(error)
             res
                 .status(400)
                 .json({error: error})
@@ -79,6 +81,7 @@ const ejerciciosController = {
         try {
             const productosToDelete = await Ejercicio.findOne({_id})
             const permitted = productosToDelete.user == req.body.user || req.body.user == 'josee'
+            console.log(permitted)
             if (!permitted){
                 return res
                             .status(403)
@@ -95,6 +98,7 @@ const ejerciciosController = {
                 .send()
 
         } catch (error) {
+            console.log(error)
             res
                 .status(400)
                 .json({error: error})

@@ -11,7 +11,9 @@ export class RegistrarComponent implements OnInit {
 
   user = {
     name: '',
-    password: ''
+    password: '',
+    last_name:'',
+    nationality: '',
   }
 
   constructor( private authService: AuthService, private router: Router) { }
@@ -21,7 +23,6 @@ export class RegistrarComponent implements OnInit {
 
   signUp(){
     console.log(this.user)
-
     this.authService.signUp(this.user).subscribe(
       res=> {
         console.log(res)
@@ -32,5 +33,26 @@ export class RegistrarComponent implements OnInit {
     )
 
   }
+
+ /* onClickGoogleLogin() {
+    this.authService.loginGoogle()
+     .then((res) => {
+         this.router.navigate(['/privado']);
+     }).catch( err => console.log(err.message));
+   }
+
+   onClickFacebookLogin() {
+     this.authService.loginFacebook()
+       .then((res) => {
+           this.router.navigate(['/privado']);
+       }).catch( err => console.log(err.message));
+   }
+
+   onClickTwitterLogin() {
+     this.authService.loginTwitter()
+       .then((res) => {
+         this.router.navigate(['/privado']);
+       }).catch (err => console.log(err.message));
+   }*/
 
 }

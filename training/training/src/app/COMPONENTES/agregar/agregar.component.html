@@ -1,28 +1,45 @@
-<p>agregar works!</p>
+<div >
+  <div class="card-header"><h1>Añade el ejercicio</h1></div>
+  <form class="form" [formGroup]="ejercicioForm" (ngSubmit)="save()">
+    <div >
+      <div class="card">
+          <div class="card-header">
+              Subir una imagen
+          </div>
+          <div class="card-body">
+              <form action="/upload" method="post" enctype="multipart/form-data" >
+                <input type="file" name="image">
+                  <button class="btn btn-primary btn-block" type="submit">
+                      Subir
+                  </button>
+              </form>
+          </div>
+      </div>
+  </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
 
-<form [formGroup]="ejercicioForm" (ngSubmit)="save()">
-  <mat-form-field appearance="fill">
-    <mat-label>Nombre</mat-label>
-    <input matInput formControlName="name">
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Descripcion</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Descripcion</mat-label>
-    <textarea matInput formControlName="description"></textarea>
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Series</mat-label>
+      <input matInput formControlName="series">
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Series</mat-label>
-    <input matInput formControlName="series">
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Repeticiones</mat-label>
+      <input matInput formControlName="repeticiones">
+    </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Repeticiones</mat-label>
-    <input matInput formControlName="repeticiones">
-  </mat-form-field>
+    <button class="form button" style="background-color: red;" [disabled]="!ejercicioForm.valid"  mat-raised-button color="primary" mat-btn-type="submit">Guardar ejercicio</button>
+  </form>
 
-  <button (click)="agregar()" mat-raised-button color="primary" mat-btn-type="submit">Guardar ejercicio</button>
+</div>
 
-  <button [disabled]="!ejercicioForm.valid"  mat-raised-button color="primary" mat-btn-type="submit">Guardar ejercicio</button>
-</form>
+
 

@@ -3,6 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ejercicio, NodeService } from 'src/app/SERVICES/node.service';
 
+interface HtmlInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
+
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html',
@@ -10,12 +14,16 @@ import { Ejercicio, NodeService } from 'src/app/SERVICES/node.service';
 })
 export class AgregarComponent {
 
+  photoSelected!: string | ArrayBuffer;
+  file!: File;
+
   ejercicioForm: FormGroup = new FormGroup({
     user: new FormControl('Nombre del usuario'),
     name: new FormControl('Nombre del ejercicio',[Validators.required, Validators.minLength(5)]),
     description: new FormControl('',[Validators.required, Validators.minLength(5)]),
-    series: new FormControl('',[Validators.required, Validators.minLength(5)]),
-    repeticiones: new FormControl('',[Validators.required, Validators.minLength(5)]),
+    image: new FormControl(''),
+    series: new FormControl(''),
+    repeticiones: new FormControl(''),
   });
 
 
@@ -30,7 +38,7 @@ export class AgregarComponent {
   }
 
   constructor(private nodeService: NodeService,
-      private rotuer: Router
+      private router: Router
     ) { }
 
   save(){
@@ -44,22 +52,37 @@ export class AgregarComponent {
         series: this.ejercicioForm.get('series')?.value,
         repeticiones: this.ejercicioForm.get('repeticiones')?.value
       };
-      this.nodeService.addEjercicio(this.ejercicio).subscribe()
-      this.rotuer.navigate(['/inicio'])
 
-
-     /* then( _ => {
-        this.rotuer.navigateByUrl('/')
-      })*/
+      this.nodeService.addEjercicio(ejercicio).subscribe(
+        ()=>this.router.navigateByUrl('/inicio'),
+        (error)=> console.log(error)
+      );
     }
 
   }
 
-  agregar(){
-   /* //delete this.ejercicio._id;
-    this.nodeService.addEjercicio(this.ejercicio).subscribe()
-
-    this.rotuer.navigate(['/inicio'])*/
+  onPhotoSelected(event: HtmlInputEvent): void {
+    if (event.target.files && event.target.files[0]) {
+      this.file = <File>event.target.files[0];
+      // image preview
+      const reader = new FileReader();
+      //reader.onload = e => this.photoSelected = reader.result;
+      reader.readAsDataURL(this.file);
+    }
   }
+
+  uploadPhoto(title: HTMLInputElement, description: HTMLTextAreaElement) {
+    this.nodeService
+      .createPhoto(title.value, description.value, this.file)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.router.navigate(['/photos'])
+        },
+        err => console.log(err)
+      );
+    return false;
+  }
+
 
 }

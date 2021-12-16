@@ -12,10 +12,14 @@ const ejercicioSchema = new Schema({
         required: true,
         minlength: 5
     },
-  /*  image: {
-        type: Image,
-        required: false
-    },*/
+    img:
+    {
+        data: Buffer,
+        contentType: String
+    },
+    imgUrl:  {
+        type: String
+    },
     description: {
         type: String,
         required: true,
@@ -27,7 +31,7 @@ const ejercicioSchema = new Schema({
         required: false
     },
     repeticiones: {
-        type: Number,
+        type: String,
         required: false
     }
 }, {versionKey: false})
@@ -35,3 +39,6 @@ const ejercicioSchema = new Schema({
 const Ejercicio = mongoose.model('Ejercicio', ejercicioSchema)
 
 export default Ejercicio
+
+
+

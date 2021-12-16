@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscriber } from 'rxjs';
+import { AuthService, User } from 'src/app/SERVICES/auth.service';
 import { Ejercicio, NodeService } from '../../SERVICES/node.service';
 
 @Component({
@@ -10,22 +11,19 @@ import { Ejercicio, NodeService } from '../../SERVICES/node.service';
 })
 export class InicioComponent implements OnInit {
 
-  //variable
-  //ListarEjercicio = new Array<Ejercicio>()
 
-  //variable
-  //ListarEjercicio = new Array<Ejercicio>()
   ListarEjercicio: Ejercicio[] = [];
 
 
-  constructor(private NodeService:NodeService, private router:Router) { }
+
+  constructor(private nodeService:NodeService, private router:Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.listarEjercicio();
   }
 
   listarEjercicio(){
-    this.NodeService.getEjercicios().subscribe(
+    this.nodeService.getEjercicios().subscribe(
       res=>{
         console.log(res)
         this.ListarEjercicio=<any>res
@@ -35,7 +33,7 @@ export class InicioComponent implements OnInit {
   }
 
   eliminar(id:string){
-    this.NodeService.deleteEjercicio(id).subscribe(
+    this.nodeService.deleteEjercicio(id).subscribe(
       res=>{
         console.log('ejercicio eliminado');
         this.listarEjercicio()
